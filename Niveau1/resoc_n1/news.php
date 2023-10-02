@@ -85,6 +85,7 @@
                 // on vous met le pied à l'étrier avec created
                 // 
                 // avec le ? > ci-dessous on sort du mode php et on écrit du html comme on veut... mais en restant dans la boucle
+                //afficher les hashtags en lien séparé
             ?>
                 <article>
                     <h3>
@@ -96,6 +97,7 @@
                     </div>
                     <footer>
                         <small><?php echo $post['like_number']    ?></small>
+
                         <a href=""><?php $tags = $post['taglist'];
                                     $tagArray = explode(',', $tags);
                                     foreach ($tagArray as $tags) {
