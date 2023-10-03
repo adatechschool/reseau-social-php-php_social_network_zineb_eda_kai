@@ -38,3 +38,23 @@ Pour éviter la complexité liée à l’inscription et l’identification, on c
 - Archive niveau 1 Divers pointeurs vers la documentation sont indiquées dans le code
 
 [Niveau1.zip](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d028a2f1-8156-4976-be39-0df5229ca27c/Niveau1.zip)
+
+Ressources utilisées :
+
+  -> news.php
+
+   Fonction explode()
+   problème : les hashtags doivent être séparés en chacun un lien
+   recherche : "separate string in php"
+   ressource :
+
+      - https://stackoverflow.com/questions/20698332/php-how-to-combine-foreach-and-explode
+      - https://www.php.net/manual/en/function.explode.php
+
+
+  -> admin.php
+
+  Etape 3 :
+    création d'un tableau $tag pour stocker les données extraites de la BdD
+    une boucle while pour récupérer les tableaux associatifs
+    on remplace les mots-clés par les valeurs récupérées dans le tableau $tag
