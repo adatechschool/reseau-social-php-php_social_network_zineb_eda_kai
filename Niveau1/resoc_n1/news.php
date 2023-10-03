@@ -103,10 +103,6 @@
                                     foreach ($tagArray as $tags) {
                                         echo '<a href="#"> #' . ($tags) . '</a>';
                                     }
-
-
-
-
                                     ?></a>
                     </footer>
                 </article>
