@@ -41,10 +41,20 @@ Pour éviter la complexité liée à l’inscription et l’identification, on c
 
 Ressources utilisées :
 
-1. Fonction explode()
+  -> news.php
+
+   Fonction explode()
    problème : les hashtags doivent être séparés en chacun un lien
    recherche : "separate string in php"
    ressource :
 
-- https://stackoverflow.com/questions/20698332/php-how-to-combine-foreach-and-explode
-- https://www.php.net/manual/en/function.explode.php
+      - https://stackoverflow.com/questions/20698332/php-how-to-combine-foreach-and-explode
+      - https://www.php.net/manual/en/function.explode.php
+
+
+  -> admin.php
+
+  Etape 3 :
+    création d'un tableau $tag pour stocker les données extraites de la BdD
+    une boucle while pour récupérer les tableaux associatifs
+    on remplace les mots-clés par les valeurs récupérées dans le tableau $tag
