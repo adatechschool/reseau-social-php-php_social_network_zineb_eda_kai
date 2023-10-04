@@ -54,7 +54,9 @@
                     posts.created,
                     users.alias as author_name,  
                     count(likes.id) as like_number,  
-                    GROUP_CONCAT(DISTINCT tags.label) AS taglist 
+                    GROUP_CONCAT(DISTINCT tags.label) AS taglist, 
+                    posts.user_id,
+                    MAX(posts_tags.tag_id) AS tag_id
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
                     LEFT JOIN posts_tags ON posts.id = posts_tags.post_id  
@@ -78,7 +80,7 @@
             while ($post = $lesInformations->fetch_assoc()) {
                 //la ligne ci-dessous doit etre supprimée mais regardez ce 
                 //qu'elle affiche avant pour comprendre comment sont organisées les information dans votre 
-                // echo "<pre>" . print_r($post, 1) . "</pre>";
+                echo "<pre>" . print_r($post, 1) . "</pre>";
 
                 // @todo : Votre mission c'est de remplacer les AREMPLACER par les bonnes valeurs
                 // ci-dessous par les bonnes valeurs cachées dans la variable $post 
@@ -91,17 +93,19 @@
                     <h3>
                         <time><?php echo $post['created'] ?></time>
                     </h3>
-                    <address><?php echo "par " . $post['author_name'] ?></address>
+                    <address>par <a href="wall.php?user_id=<?php echo $post['user_id']; ?>"><?php echo $post['author_name']; ?></a></address>
                     <div>
                         <p><?php echo $post['content']   ?></p>
+                        <p><?php echo $post['tag_id']   ?></p>
                     </div>
                     <footer>
                         <small>♥ <?php echo $post['like_number']    ?></small>
 
                         <a href=""><?php $tags = $post['taglist'];
+                                    $tagId = $post['tag_id'];
                                     $tagArray = explode(',', $tags);
                                     foreach ($tagArray as $tags) {
-                                        echo '<a href="#"> #' . ($tags) . '</a>';
+                                        echo '<a href="tags.php?tag_id= '.$tagId.'"> #' . ($tags) . '</a>';
                                     }
                                     ?></a>
                     </footer>
