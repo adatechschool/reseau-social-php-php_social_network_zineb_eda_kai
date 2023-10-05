@@ -78,7 +78,8 @@ session_start();
                     if (!$user or $user["password"] != $passwdAVerifier) {
                         echo "La connexion a échouée. ";
                     } else {
-                        echo "Votre connexion est un succès : " . $user['alias'] . ".";
+                        // echo "Votre connexion est un succès : " . $user['alias'] . ".";
+                        header("Location: wall.php?user_id=" . $_SESSION['connected_id']);
                         // Etape 7 : Se souvenir que l'utilisateur s'est connecté pour la suite
                         // documentation: https://www.php.net/manual/fr/session.examples.basic.php
                         $_SESSION['connected_id'] = $user['id'];
