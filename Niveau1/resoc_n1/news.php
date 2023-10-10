@@ -103,9 +103,13 @@
 
                         <a href=""><?php $tags = $post['taglist'];
                                     $tagId = $post['tag_id'];
-                                    $tagArray = explode(',', $tags);
-                                    foreach ($tagArray as $tags) {
-                                        echo '<a href="tags.php?tag_id= '.$tagId.'"> #' . ($tags) . '</a>';
+                                    if (!empty($tags)) {
+                                        $tagArray = explode(',', $tags);
+                                        foreach ($tagArray as $tag) {
+                                            echo '<a href="tags.php?tag_id=' . $tagId . '"> #' . $tag . '</a>';
+                                        }
+                                    } else {
+                                        echo '#';
                                     }
                                     ?></a>
                     </footer>

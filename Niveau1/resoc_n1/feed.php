@@ -45,7 +45,7 @@
             <img src="user.jpg" alt="Portrait de l'utilisatrice" />
             <section>
                 <h3>Présentation</h3>
-                <p>Bonjour <?php echo $user['alias'] ?> (n° <?php echo $userId ?>) sur cette page vous trouverez tous les message des utilisatrices que vous suivez :                  
+                <p>Bonjour <?php echo $user['alias'] ?> (n° <?php echo $userId ?>) sur cette page vous trouverez tous les message des utilisatrices que vous suivez :
                 </p>
             </section>
         </aside>
@@ -96,9 +96,13 @@
                         <small>♥ <?php echo $post['like_number']   ?></small>
                         <a href=""><?php $tags = $post['taglist'];
                                     $tagId = $post['tag_id'];
-                                    $tagArray = explode(',', $tags);
-                                    foreach ($tagArray as $tags) {
-                                        echo '<a href="tags.php?tag_id= ' . $tagId . '"> #' . ($tags) . '</a>';
+                                    if (!empty($tags)) {
+                                        $tagArray = explode(',', $tags);
+                                        foreach ($tagArray as $tag) {
+                                            echo '<a href="tags.php?tag_id=' . $tagId . '"> #' . $tag . '</a>';
+                                        }
+                                    } else {
+                                        echo '#';
                                     }
                                     ?></a>
                     </footer>

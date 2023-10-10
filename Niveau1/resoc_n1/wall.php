@@ -53,24 +53,28 @@
             </section>
         </aside>
         <main>
-            <?php if(isset($_SESSION['connected_id'])): ?>
-            <article>
-                <h2>Poster un message</h2>
-                <form action="handle_message.php" method="post">
-                    <input type='hidden' name='user_id' value=<?php echo $userId; ?>>
-                    <dl>
-                        <dt><label for='content'>Message</label></dt>
-                        <dd><textarea name='content'></textarea></dd>
-                    </dl>
-                    <input type='submit' value='Envoyer'>
-                </form>
-                <form action="logout.php" method="post">
-                <input type="submit" value="Déconnexion">
-                </form>
-            </article>
-            <?php else: ?>
-            <?php include_once('login.php'); ?>;
+            <?php if ($userId == $_SESSION['connected_id']) : ?>
+                <article>
+                    <h2>Poster un message</h2>
+                    <form action="handle_message.php" method="post">
+                        <input type='hidden' name='user_id' value=<?php echo $userId; ?>>
+                        <dl>
+                            <dt><label for='content'>Message</label></dt>
+                            <dd><textarea name='content'></textarea></dd>
+                        </dl>
+                        <input type='submit' value='Envoyer'>
+                    </form>
+                    <form action="logout.php" method="post">
+                        <input type="submit" value="Déconnexion">
+                    </form>
+                </article>
+            <?php elseif (!$userId) : ?>
+                <article>
+                    <p>Veuillez vous connecter pour poster un message.</p>
+                </article>
+                <?php include_once('login.php'); ?>
             <?php endif; ?>
+            ​
             <?php
             /**
              * Etape 3: récupérer tous les messages de l'utilisatrice
@@ -114,9 +118,13 @@
                         <small>♥ <?php echo $post['like_number']   ?></small>
                         <a href=""><?php $tags = $post['taglist'];
                                     $tagId = $post['tag_id'];
-                                    $tagArray = explode(',', $tags);
-                                    foreach ($tagArray as $tags) {
-                                        echo '<a href="tags.php?tag_id= ' . $tagId . '"> #' . ($tags) . '</a>';
+                                    if (!empty($tags)) {
+                                        $tagArray = explode(',', $tags);
+                                        foreach ($tagArray as $tag) {
+                                            echo '<a href="tags.php?tag_id=' . $tagId . '"> #' . $tag . '</a>';
+                                        }
+                                    } else {
+                                        echo '#';
                                     }
                                     ?></a>
                     </footer>
