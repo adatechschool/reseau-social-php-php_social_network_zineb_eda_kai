@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 session_start();
 ?>
 <!doctype html>
@@ -37,7 +37,7 @@ session_start();
             <h2>Présentation</h2>
             <p>Bienvenu sur notre réseau social.</p>
         </aside>
-        <main>
+        <main> -->
             <article>
                 <h2>Connexion</h2>
                 <?php
@@ -78,11 +78,11 @@ session_start();
                     if (!$user or $user["password"] != $passwdAVerifier) {
                         echo "La connexion a échouée. ";
                     } else {
-                        // echo "Votre connexion est un succès : " . $user['alias'] . ".";
+                        echo "Votre connexion est un succès : " . $user['alias'] . ".";
+                        $_SESSION['connected_id'] = $user['id'];
                         header("Location: wall.php?user_id=" . $_SESSION['connected_id']);
                         // Etape 7 : Se souvenir que l'utilisateur s'est connecté pour la suite
                         // documentation: https://www.php.net/manual/fr/session.examples.basic.php
-                        $_SESSION['connected_id'] = $user['id'];
                     }
                 }
                 ?>
@@ -102,8 +102,8 @@ session_start();
                 </p>
 
             </article>
-        </main>
+        <!-- </main>
     </div>
 </body>
 
-</html>
+</html> -->

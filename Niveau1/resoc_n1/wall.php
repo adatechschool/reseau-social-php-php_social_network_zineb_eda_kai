@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 <!doctype html>
 <html lang="fr">
 
@@ -55,18 +53,24 @@ session_start();
             </section>
         </aside>
         <main>
-        <article>
-                    <h2>Poster un message</h2>
-            <form action="handle_message.php" method="post">
-                <input type='hidden' name='user_id' value=<?php echo $userId; ?>>
-                <dl>
-                    <dt><label for='content'>Message</label></dt>
-                    <dd><textarea name='content'></textarea></dd>
-                </dl>
-                <input type='submit' value='Envoyer'>
-            </form>
-             </article>
-
+            <?php if(isset($_SESSION['connected_id'])): ?>
+            <article>
+                <h2>Poster un message</h2>
+                <form action="handle_message.php" method="post">
+                    <input type='hidden' name='user_id' value=<?php echo $userId; ?>>
+                    <dl>
+                        <dt><label for='content'>Message</label></dt>
+                        <dd><textarea name='content'></textarea></dd>
+                    </dl>
+                    <input type='submit' value='Envoyer'>
+                </form>
+                <form action="logout.php" method="post">
+                <input type="submit" value="Déconnexion">
+                </form>
+            </article>
+            <?php else: ?>
+            <?php include_once('login.php'); ?>;
+            <?php endif; ?>
             <?php
             /**
              * Etape 3: récupérer tous les messages de l'utilisatrice
