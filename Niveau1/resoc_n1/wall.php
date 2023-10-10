@@ -107,7 +107,8 @@ session_start();
                 </article>
 
             <?php } ?>
-
+            <article>
+                    <h2>Poster un message</h2>
             <form action="handle_message.php" method="post">
                 <input type='hidden' name='user_id' value=<?php echo $userId; ?>>
                 <dl>
@@ -116,7 +117,7 @@ session_start();
                 </dl>
                 <input type='submit' value='Envoyer'>
             </form>
-
+             </article>
 
         </main>
     </div>
