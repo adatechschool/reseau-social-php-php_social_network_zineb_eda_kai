@@ -64,15 +64,12 @@
                         </dl>
                         <input type='submit' value='Envoyer'>
                     </form>
-                    <form action="logout.php" method="post">
-                        <input type="submit" value="Déconnexion">
-                    </form>
                 </article>
             <?php elseif (!$userId) : ?>
                 <article>
                     <p>Veuillez vous connecter pour poster un message.</p>
                 </article>
-                <?php include_once('login.php'); ?>
+                <?php include('login.php'); ?>
             <?php endif; ?>
             ​
             <?php
