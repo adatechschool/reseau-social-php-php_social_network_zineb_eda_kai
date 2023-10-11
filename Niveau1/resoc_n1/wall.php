@@ -40,7 +40,7 @@
             $lesInformations = $mysqli->query($laQuestionEnSql);
             $user = $lesInformations->fetch_assoc();
             //@todo: afficher le résultat de la ligne ci dessous, remplacer XXX par l'alias et effacer la ligne ci-dessous
-            echo "<pre>" . print_r($user, 1) . "</pre>";
+            // echo "<pre>" . print_r($user, 1) . "</pre>";
             ?>
             <img src="user.jpg" alt="Portrait de l'utilisatrice" />
             <?php if ($userId === intval($_SESSION['connected_id'])) : ?>
@@ -50,7 +50,6 @@
                     Bienvenue sur votre mur. <br>
                     Vous trouverez ici tous vos messages.
                 </p>
-                <p>connecté? <?php echo $_SESSION['connected_id'] ?> id <?php echo $userId; ?></p>
             </section>
             <?php else : ?>
             <section>
@@ -142,7 +141,7 @@ if ($userId === intval($_SESSION['connected_id'])) : ?>
              */
             while ($post = $lesInformations->fetch_assoc()) {
 
-                echo "<pre>" . print_r($post, 1) . "</pre>";
+                // echo "<pre>" . print_r($post, 1) . "</pre>";
             ?>
                 <article>
                     <h3>
@@ -151,8 +150,6 @@ if ($userId === intval($_SESSION['connected_id'])) : ?>
                     <address>par <a href="wall.php?user_id=<?php echo $post['user_id']; ?>"><?php echo $post['author_name']; ?></a></address>
                     <div>
                         <p><?php echo $post['content']   ?></p>
-                        <?php echo $post['post_id']; ?>
-
                     </div>
                     <footer>
                         <small>♥ <?php echo $post['like_number']   ?></small>
