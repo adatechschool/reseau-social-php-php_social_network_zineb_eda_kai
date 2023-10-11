@@ -40,7 +40,7 @@
             $lesInformations = $mysqli->query($laQuestionEnSql);
             $user = $lesInformations->fetch_assoc();
             //@todo: afficher le résultat de la ligne ci dessous, remplacer XXX par l'alias et effacer la ligne ci-dessous
-            // echo "<pre>" . print_r($user, 1) . "</pre>";
+            echo "<pre>" . print_r($user, 1) . "</pre>";
             ?>
             <img src="user.jpg" alt="Portrait de l'utilisatrice" />
             <section>
@@ -80,6 +80,7 @@
                     SELECT posts.content, posts.created, users.alias as author_name, 
                     COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist,                     
                     posts.user_id,
+                    likes.post_id AS post_id,
                     MAX(posts_tags.tag_id) AS tag_id
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
@@ -100,7 +101,7 @@
              */
             while ($post = $lesInformations->fetch_assoc()) {
 
-                // echo "<pre>" . print_r($post, 1) . "</pre>";
+                echo "<pre>" . print_r($post, 1) . "</pre>";
             ?>
                 <article>
                     <h3>
@@ -109,10 +110,16 @@
                     <address>par <a href="wall.php?user_id=<?php echo $post['user_id']; ?>"><?php echo $post['author_name']; ?></a></address>
                     <div>
                         <p><?php echo $post['content']   ?></p>
+                        <?php echo $post['post_id']; ?>
 
                     </div>
                     <footer>
                         <small>♥ <?php echo $post['like_number']   ?></small>
+                        <form action="like.php" method="post">
+                            <input type="hidden" name="message_id" value="<?php echo $post['post_id']; ?>">
+                            <input type="hidden" name="action" value="like">
+                            <button type="submit" name="like">J'aime</button>
+                        </form>
                         <a href=""><?php $tags = $post['taglist'];
                                     $tagId = $post['tag_id'];
                                     if (!empty($tags)) {
