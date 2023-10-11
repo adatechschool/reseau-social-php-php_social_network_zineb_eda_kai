@@ -43,6 +43,16 @@
             echo "<pre>" . print_r($user, 1) . "</pre>";
             ?>
             <img src="user.jpg" alt="Portrait de l'utilisatrice" />
+            <?php if ($userId === intval($_SESSION['connected_id'])) : ?>
+                <section>
+                <h3>Présentation</h3>
+                <p>Bonjour : <?php echo $user['alias'] ?> (n° <?php echo $userId ?>). <br>
+                    Bienvenue sur votre mur. <br>
+                    Vous trouverez ici tous vos messages.
+                </p>
+                <p>connecté? <?php echo $_SESSION['connected_id'] ?> id <?php echo $userId; ?></p>
+            </section>
+            <?php else : ?>
             <section>
                 <h3>Présentation</h3>
                 <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias'] ?>
@@ -54,11 +64,9 @@
                     <input type="hidden" name="followed_user_id" value="<?php echo $userId; ?>">
                     <button type="submit">S'abonner</button>
                 </form>
-
-
-
-
             </section>
+            <?php endif; ?>
+
         </aside>
         <main>
             <?php if ($userId === intval($_SESSION['connected_id'])) : ?>

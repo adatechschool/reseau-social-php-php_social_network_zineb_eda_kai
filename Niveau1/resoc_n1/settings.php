@@ -27,8 +27,8 @@ if (!isset($_SESSION['connected_id'])) {
             <img src="user.jpg" alt="Portrait de l'utilisatrice" />
             <section>
                 <h3>Présentation</h3>
-                <p>Sur cette page vous trouverez les informations de l'utilisatrice
-                    n° <?php echo intval($_GET['user_id']) ?></p>
+                <p>Bonjour utilisatrice n° <?php echo intval($_GET['user_id']) ?>. <br>
+                Sur cette page vous trouverez vos informations.</p>
 
             </section>
         </aside>
@@ -55,11 +55,11 @@ if (!isset($_SESSION['connected_id'])) {
                     SELECT users.*, 
                     count(DISTINCT posts.id) as totalpost, 
                     count(DISTINCT given.post_id) as totalgiven, 
-                    count(DISTINCT recieved.user_id) as totalrecieved 
+                    count(DISTINCT received.user_id) as totalreceived 
                     FROM users 
                     LEFT JOIN posts ON posts.user_id=users.id 
                     LEFT JOIN likes as given ON given.user_id=users.id 
-                    LEFT JOIN likes as recieved ON recieved.post_id=posts.id 
+                    LEFT JOIN likes as received ON received.post_id=posts.id 
                     WHERE users.id = '$userId' 
                     GROUP BY users.id
                     ";
@@ -91,7 +91,7 @@ if (!isset($_SESSION['connected_id'])) {
                         <dt>Nombre de "J'aime" donnés </dt>
                         <dd><?php echo $user['totalgiven'] ?></dd>
                         <dt>Nombre de "J'aime" reçus</dt>
-                        <dd><?php echo $user['totalrecieved'] ?></dd>
+                        <dd><?php echo $user['totalreceived'] ?></dd>
                     </dl>
 
                 </article>

@@ -23,7 +23,7 @@ $connectedUserId = $_SESSION['connected_id'];
                 echo '<li><a href="subscriptions.php?user_id=' . $connectedUserId . '">Mes abonnements</a></li>';
                 echo '<li><a href="logout.php?user_id=' . $connectedUserId . '">Déconnexion</a></li>';
             } else {
-                echo '<li><a href="login.php">Connexion</a></li>';
+                echo '<li><a href="userlogin.php">Connexion</a></li>';
             }
             ?>
 
