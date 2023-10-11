@@ -43,7 +43,7 @@
             // echo "<pre>" . print_r($user, 1) . "</pre>";
             ?>
             <img src="user.jpg" alt="Portrait de l'utilisatrice" />
-            <?php if ($userId === intval($_SESSION['connected_id'])) : ?>
+            <?php if (isset($_SESSION['connected_id']) && $userId === intval($_SESSION['connected_id'])) : ?>
                 <section>
                 <h3>Présentation</h3>
                 <p>Bonjour : <?php echo $user['alias'] ?> (n° <?php echo $userId ?>). <br>
@@ -57,8 +57,8 @@
                 <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias'] ?>
                     (n° <?php echo $userId ?>)
                 </p>
-                <p>connecté? <?php echo $_SESSION['connected_id'] ?> id <?php echo $userId; ?></p>
-
+                <?php endif; ?>
+                <?php if (isset($_SESSION['connected_id']) && $userId !== intval($_SESSION['connected_id'])) : ?>
                 <form action="subscribe.php" method="post">
                     <input type="hidden" name="followed_user_id" value="<?php echo $userId; ?>">
                     <button type="submit">S'abonner</button>
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if ($userId === intval($_SESSION['connected_id'])) : ?>
+if (isset($_SESSION['connected_id']) && $userId === intval($_SESSION['connected_id'])) : ?>
     <article>
         <h2>Poster un message</h2>
         <form action="handle_message.php" method="post">
