@@ -16,12 +16,16 @@ $connectedUserId = $_SESSION['connected_id'];
     <nav id="user">
         <a href="#">Profil</a>
         <ul>
-            <li><a href="settings.php?user_id=<?php echo $connectedUserId; ?>">Paramètres</a></li>
-            <li><a href="followers.php?user_id=<?php echo $connectedUserId; ?>">Mes suiveurs</a></li>
-            <li><a href="subscriptions.php?user_id=<?php echo $connectedUserId; ?>">Mes abonnements</a></li>
-            <li><a href="logout.php?user_id=<?php echo $connectedUserId; ?>">Déconnexion</a></li>
-
-        </ul>
+            <?php
+            if ($connectedUserId) {
+                echo '<li><a href="settings.php?user_id=' . $connectedUserId . '">Paramètres</a></li>';
+                echo '<li><a href="followers.php?user_id=' . $connectedUserId . '">Mes suiveurs</a></li>';
+                echo '<li><a href="subscriptions.php?user_id=' . $connectedUserId . '">Mes abonnements</a></li>';
+                echo '<li><a href="logout.php?user_id=' . $connectedUserId . '">Déconnexion</a></li>';
+            } else {
+                echo '<li><a href="login.php">Connexion</a></li>';
+            }
+            ?>
 
     </nav>
 </header>
