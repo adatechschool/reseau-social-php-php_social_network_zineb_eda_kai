@@ -1,8 +1,10 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $connectedUserId = $_SESSION['connected_id'];
 ?>
-
 <header>
     <img src="resoc.jpg" alt="Logo de notre réseau social" />
     <nav id="menu">
