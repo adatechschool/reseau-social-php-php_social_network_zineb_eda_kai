@@ -69,24 +69,49 @@
 
         </aside>
         <main>
-            <?php if ($userId === intval($_SESSION['connected_id'])) : ?>
-                <article>
-                    <h2>Poster un message</h2>
-                    <form action="handle_message.php" method="post">
-                        <input type='hidden' name='user_id' value=<?php echo $userId; ?>>
-                        <dl>
-                            <dt><label for='content'>Message</label></dt>
-                            <dd><textarea name='content'></textarea></dd>
-                        </dl>
-                        <input type='submit' value='Envoyer'>
-                    </form>
-                </article>  
-            <?php elseif (!isset($_SESSION['connected_id'])) : ?>
-                <article>
-                    <p>Veuillez vous connecter pour poster un message.</p>
-                </article>
-                <?php include('login.php'); ?>
-            <?php endif; ?>
+        <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Assurez-vous que l'utilisateur est connecté avant d'insérer un message
+    if (isset($_SESSION['connected_id'])) {
+        // Récupérez le contenu du message depuis le formulaire
+        $messageContent = $_POST['content'];
+
+        // Évitez les attaques par injection SQL en utilisant une requête préparée
+        $insertQuery = $mysqli->prepare("INSERT INTO posts (user_id, content) VALUES (?, ?)");
+        $insertQuery->bind_param("is", $userId, $messageContent);
+
+        // Assurez-vous que l'insertion s'est bien déroulée
+        if ($insertQuery->execute()) {
+            // Message inséré avec succès
+            // Vous pouvez rediriger l'utilisateur vers une page de confirmation ou actualiser la page.
+            // Par exemple, redirigez vers wall.php pour afficher à nouveau le mur de l'utilisateur.
+            header('Location: wall.php?user_id=' . $userId);
+            exit();
+        } else {
+            // Une erreur s'est produite lors de l'insertion du message
+            echo "Une erreur s'est produite lors de l'insertion.";
+        }
+    }
+}
+
+if ($userId === intval($_SESSION['connected_id'])) : ?>
+    <article>
+        <h2>Poster un message</h2>
+        <form action="handle_message.php" method="post">
+            <input type='hidden' name='user_id' value=<?php echo $userId; ?>>
+            <dl>
+                <dt><label for='content'>Message</label></dt>
+                <dd><textarea name='content'></textarea></dd>
+            </dl>
+            <input type='submit' value='Envoyer'>
+        </form>
+    </article>
+<?php elseif (!isset($_SESSION['connected_id'])) : ?>
+    <article>
+        <p>Veuillez vous connecter pour poster un message.</p>
+    </article>
+    <?php include('login.php'); ?>
+<?php endif; ?>
             ​
             <?php
             /**

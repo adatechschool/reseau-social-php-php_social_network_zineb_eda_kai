@@ -8,8 +8,8 @@ $content = $_POST['content'];
 
 $insertQuery =
     "INSERT INTO posts"
-    . "(user_id, content, created) "
-    . "VALUES ('$userId', '$content', NOW())";
+    . "(user_id, content, created, parent_id) "
+    . "VALUES ('$userId', '$content', NOW(), NULL)";
 
 if ($mysqli->query($insertQuery) === TRUE) {
 
