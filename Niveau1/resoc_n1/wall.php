@@ -121,7 +121,7 @@ if ($userId === intval($_SESSION['connected_id'])) : ?>
                     SELECT posts.content, posts.created, users.alias as author_name, 
                     (SELECT COUNT(likes.id) FROM likes WHERE likes.post_id = posts.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist,                     
                     posts.user_id,
-                    likes.post_id AS post_id,
+                    posts.id AS post_id,
                     MAX(posts_tags.tag_id) AS tag_id
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
