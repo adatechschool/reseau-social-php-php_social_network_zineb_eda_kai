@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Erreur lors de l\'abonnement : ' . $mysqli->error;
         }
     } else {
-        echo "<script>alert('Vous êtes déjà abonné à cet utilisateur.');</script>";
+        echo 'Vous êtes déjà abonné à cet utilisateur.';
     }
 } else {
     echo 'Méthode non autorisée.';

@@ -1,3 +1,11 @@
+<?php
+session_start();
+//si la session n'est pas connectée alors redirection vers login.php
+if (!isset($_SESSION['connected_id'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
 <!doctype html>
 <html lang="fr">
 
