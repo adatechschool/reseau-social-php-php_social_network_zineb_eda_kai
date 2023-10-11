@@ -61,7 +61,7 @@
             </section>
         </aside>
         <main>
-            <?php if ($userId === $_SESSION['connected_id']) : ?>
+            <?php if ($userId === intval($_SESSION['connected_id'])) : ?>
                 <article>
                     <h2>Poster un message</h2>
                     <form action="handle_message.php" method="post">
@@ -72,8 +72,8 @@
                         </dl>
                         <input type='submit' value='Envoyer'>
                     </form>
-                </article>
-            <?php else : ?>
+                </article>  
+            <?php elseif (!isset($_SESSION['connected_id'])) : ?>
                 <article>
                     <p>Veuillez vous connecter pour poster un message.</p>
                 </article>
