@@ -48,6 +48,8 @@
                 <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias'] ?>
                     (n° <?php echo $userId ?>)
                 </p>
+                <p>connecté? <?php echo $_SESSION['connected_id'] ?> id <?php echo $userId; ?></p>
+
                 <form action="subscribe.php" method="post">
                     <input type="hidden" name="followed_user_id" value="<?php echo $userId; ?>">
                     <button type="submit">S'abonner</button>
@@ -59,7 +61,7 @@
             </section>
         </aside>
         <main>
-            <?php if ($userId == $_SESSION['connected_id']) : ?>
+            <?php if ($userId === $_SESSION['connected_id']) : ?>
                 <article>
                     <h2>Poster un message</h2>
                     <form action="handle_message.php" method="post">
@@ -71,7 +73,7 @@
                         <input type='submit' value='Envoyer'>
                     </form>
                 </article>
-            <?php elseif (!$userId) : ?>
+            <?php else : ?>
                 <article>
                     <p>Veuillez vous connecter pour poster un message.</p>
                 </article>
@@ -84,7 +86,7 @@
              */
             $laQuestionEnSql = "
                     SELECT posts.content, posts.created, users.alias as author_name, 
-                    COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist,                     
+                    (SELECT COUNT(likes.id) FROM likes WHERE likes.post_id = posts.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist,                     
                     posts.user_id,
                     likes.post_id AS post_id,
                     MAX(posts_tags.tag_id) AS tag_id
