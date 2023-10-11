@@ -12,7 +12,7 @@ if (!isset($_SESSION['connected_id'])) {
 <head>
     <meta charset="utf-8">
     <title>ReSoC - Flux</title>
-    <meta name="author" content="Julien Falconnet">
+    <meta name="author" content="ZEdaK">
     <link rel="stylesheet" href="style.css" />
 </head>
 

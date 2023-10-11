@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>ReSoC - Les message par mot-clé</title>
-    <meta name="author" content="Julien Falconnet">
+    <meta name="author" content="ZEdaK">
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -84,7 +84,7 @@
              */
             while ($post = $lesInformations->fetch_assoc()) {
 
-                // echo "<pre>" . print_r($post, 1) . "</pre>";
+                echo "<pre>" . print_r($post, 1) . "</pre>";
             ?>
                 <article>
                     <h3>
@@ -96,7 +96,7 @@
                     </div>
                     <footer>
                         <small>♥ <?php echo $post['like_number']   ?></small>
-                        <a href=""><?php $tags = $post['taglist'];
+                        <?php $tags = $post['taglist'];
                                     $tagId = $post['tag_id'];
                                     if (!empty($tags)) {
                                         $tagArray = explode(',', $tags);
@@ -106,7 +106,7 @@
                                     } else {
                                         echo '#';
                                     }
-                                    ?></a>
+                            ?>
                     </footer>
                 </article>
             <?php } ?>

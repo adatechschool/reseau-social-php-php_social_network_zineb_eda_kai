@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>ReSoC - Inscription</title> 
-        <meta name="author" content="Julien Falconnet">
+        <meta name="author" content="ZEdaK">
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
